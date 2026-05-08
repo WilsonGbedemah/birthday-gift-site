@@ -1,14 +1,16 @@
 {
-  "name": "Scrim-s04ieqf5ce",
-  "description": "https://v2.scrimba.com/learn-html-and-css-c0p/~033",
+  "name": "nana-yaa-day",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Nana Yaa Day — a little birthday celebration made just for her.",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "vite": "latest"
-  },
-  "devDependencies": {}
+  "devDependencies": {
+    "vite": "^8.0.0"
+  }
 }

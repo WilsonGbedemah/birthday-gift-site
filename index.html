@@ -1,46 +1,286 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Nana Yaa Day · May 25</title>
+        <meta name="description" content="Nana Yaa Day — a little birthday celebration made just for her." />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div id="header">
-            <h1>Today is Jonathan's birthday 🎉</h1>
-            <img id="bff-img" src="images/joe.jpg">
-            <h2 id="bday-age">😒 years old</h2>
-            <h4 id="bday-date">05.09</h4>
+        <!-- Birthday-day-only intro overlay (auto-shown on her actual birthday) -->
+        <div class="intro" id="intro" hidden>
+            <div class="intro__sparkles" aria-hidden="true"></div>
+            <div class="intro__content">
+                <p class="intro__eyebrow">today is</p>
+                <h1 class="intro__title">Nana Yaa Day</h1>
+                <p class="intro__date">May 25 ♥</p>
+                <p class="intro__cta">tap anywhere to enter</p>
+            </div>
         </div>
-        
-        <div class="gift-section">
-            <h2 class="gift-title">Here's how happy I am for you today 🥳</h2>
-            <h3 class="gift-hint">(Hover over the gift)</h3>
-            <div class="gift-img" id="gift-img-happy"></div>
+
+        <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+        <div id="balloons" aria-hidden="true"></div>
+
+        <main class="page">
+            <header class="hero">
+                <p class="hero__eyebrow" id="eyebrow" tabindex="0">✨ Nana Yaa Day ✨</p>
+
+                <div class="hero__photo" id="hero-photo">
+                    <div class="hero__crown" aria-hidden="true">👑</div>
+                    <div class="hero__photo-ring" aria-hidden="true"></div>
+                    <img src="images/nana%20yaa.jpg" alt="Nana Yaa" />
+                </div>
+
+                <h1 class="hero__title">
+                    Today belongs to <span class="hero__name">Nana Yaa</span>
+                </h1>
+
+                <div class="hero__stats">
+                    <div class="stat">
+                        <span class="stat__value" id="age-value">—</span>
+                        <span class="stat__label">years young</span>
+                    </div>
+                    <div class="stat stat--accent">
+                        <span class="stat__value" id="countdown-value">—</span>
+                        <span class="stat__label" id="countdown-label">until the big day</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__value">May 25</span>
+                        <span class="stat__label">birthday</span>
+                    </div>
+                </div>
+
+                <p class="hero__intro">
+                    Five little gifts. Tap each one to unwrap a wish.
+                </p>
+            </header>
+
+            <!-- ========== YEAR IN NUMBERS ========== -->
+            <section class="numbers" aria-label="A life in numbers">
+                <p class="section__eyebrow">a life, by the numbers</p>
+                <div class="numbers__grid">
+                    <div class="num-card">
+                        <span class="num-card__value" id="num-days">—</span>
+                        <span class="num-card__label">sunsets witnessed</span>
+                    </div>
+                    <div class="num-card">
+                        <span class="num-card__value" id="num-moons">—</span>
+                        <span class="num-card__label">full moons seen</span>
+                    </div>
+                    <div class="num-card num-card--accent num-card--heart">
+                        <span class="num-card__value" id="num-heartbeats">—</span>
+                        <span class="num-card__label">
+                            <span class="heart-pulse" aria-hidden="true">❤</span>
+                            heartbeats &amp; counting
+                        </span>
+                    </div>
+                    <div class="num-card">
+                        <span class="num-card__value" id="num-hours">—</span>
+                        <span class="num-card__label">hours of magic</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== GEMINI CARD ========== -->
+            <section class="zodiac" aria-label="Born under Gemini">
+                <div class="zodiac__sigil" aria-hidden="true">♊</div>
+                <p class="section__eyebrow">born under gemini</p>
+                <h2 class="zodiac__title">Two minds, twice the magic.</h2>
+                <p class="zodiac__body">
+                    Gemini people don't walk into rooms — they arrive. Quick-witted, endlessly curious,
+                    and somehow the funniest person in every conversation. You collect ideas like other
+                    people collect photos. May this year hand you stories worth telling and rooms worth
+                    being the loudest in.
+                </p>
+            </section>
+
+            <!-- ========== GIFTS ========== -->
+            <section class="gifts" aria-label="Birthday gifts">
+                <article class="gift" data-gif="images/happy.gif">
+                    <h2 class="gift__title">How happy I am for you today</h2>
+                    <p class="gift__hint">Tap to unwrap</p>
+                    <button class="gift__box" type="button" aria-label="Unwrap gift 1">
+                        <span class="gift__ribbon" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                    </button>
+                </article>
+
+                <article class="gift" data-gif="images/hot.gif">
+                    <h2 class="gift__title">How people react when you walk in</h2>
+                    <p class="gift__hint">Tap to unwrap</p>
+                    <button class="gift__box" type="button" aria-label="Unwrap gift 2">
+                        <span class="gift__ribbon" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                    </button>
+                </article>
+
+                <article class="gift" data-gif="images/genius.gif">
+                    <h2 class="gift__title">If I described you in one word</h2>
+                    <p class="gift__hint">Tap to unwrap</p>
+                    <button class="gift__box" type="button" aria-label="Unwrap gift 3">
+                        <span class="gift__ribbon" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                    </button>
+                </article>
+
+                <article class="gift" data-gif="images/badass.gif">
+                    <h2 class="gift__title">The only person as badass as you</h2>
+                    <p class="gift__hint">Tap to unwrap</p>
+                    <button class="gift__box" type="button" aria-label="Unwrap gift 4">
+                        <span class="gift__ribbon" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                    </button>
+                </article>
+
+                <article class="gift" data-gif="images/cheers.gif">
+                    <h2 class="gift__title">This one's for you, my friend</h2>
+                    <p class="gift__hint">Tap to unwrap</p>
+                    <button class="gift__box" type="button" aria-label="Unwrap gift 5">
+                        <span class="gift__ribbon" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                    </button>
+                </article>
+
+                <!-- A 6th, extra-special gift -->
+                <article class="gift gift--surprise" id="surprise-gift">
+                    <h2 class="gift__title">A secret, just for the birthday girl</h2>
+                    <p class="gift__hint" id="surprise-hint">Tap for your secret ✨</p>
+                    <button class="gift__box gift__box--surprise" type="button" aria-label="Surprise gift">
+                        <span class="gift__shine" aria-hidden="true"></span>
+                        <span class="gift__bow" aria-hidden="true">🎀</span>
+                        <span class="gift__secret">
+                            <span class="gift__secret-eyebrow">your secret</span>
+                            <span class="gift__secret-line">You're the gift,</span>
+                            <span class="gift__secret-line gift__secret-line--accent">sunshine.</span>
+                            <span class="gift__secret-foot">— now go shine ♥</span>
+                        </span>
+                    </button>
+                </article>
+            </section>
+
+            <!-- ========== CAKE / CANDLES ========== -->
+            <section class="cake-section" aria-label="Blow out the candles">
+                <p class="section__eyebrow">blow out the candles</p>
+                <h2 class="section__title">Make a wish, Nana Yaa.</h2>
+                <p class="section__sub">Tap each candle to put it out. All thirty.</p>
+
+                <div class="cake" role="group" aria-label="Birthday cake with candles">
+                    <div class="cake__candles" id="cake-candles"></div>
+                    <div class="cake__layer cake__layer--top"></div>
+                    <div class="cake__layer cake__layer--mid"></div>
+                    <div class="cake__layer cake__layer--bottom"></div>
+                    <div class="cake__plate"></div>
+                </div>
+
+                <p class="cake__counter"><span id="candles-left">30</span> candles still burning</p>
+                <button class="cake__reset" type="button" id="cake-reset" hidden>Light them again</button>
+                <p class="cake__wish" id="cake-wish" hidden>Wish granted. ✨</p>
+            </section>
+
+            <!-- ========== THINGS WE LOVE ========== -->
+            <section class="loves" aria-label="Things we love about Nana Yaa">
+                <p class="section__eyebrow">a few of our favourite things</p>
+                <h2 class="section__title">The Nana Yaa starter pack.</h2>
+                <p class="section__sub">A short, very incomplete list.</p>
+                <div class="loves__cloud">
+                    <span class="love-pill">kind without keeping score</span>
+                    <span class="love-pill">laughs with her whole face</span>
+                    <span class="love-pill">soft heart, sharp wit</span>
+                    <span class="love-pill">main character, supporting heart</span>
+                    <span class="love-pill">calls back when it counts</span>
+                    <span class="love-pill">knows every lyric</span>
+                    <span class="love-pill">best dancer in the room</span>
+                    <span class="love-pill">stubbornly, beautifully herself</span>
+                    <span class="love-pill">wears confidence like jewelry</span>
+                    <span class="love-pill">remembers the small stuff</span>
+                    <span class="love-pill">loyal to a beautiful fault</span>
+                    <span class="love-pill">the room is brighter, every time</span>
+                </div>
+            </section>
+
+            <!-- ========== NOTE ========== -->
+            <section class="note" aria-label="A note for the birthday person">
+                <p class="note__label">for Nana Yaa, on her day —</p>
+                <p class="note__body">
+                    May today be loud where you want it loud, and soft where you need it soft.
+                    May this year find you laughing in good company, dancing in bad lighting,
+                    and stumbling into every small joy you forgot to ask for. The world feels
+                    a little brighter because of you — and today, we get to say it out loud.
+                </p>
+                <p class="note__signoff">happy birthday, sunshine ✨</p>
+            </section>
+
+            <!-- ========== VOICE MESSAGE (Web Speech API) ========== -->
+            <section class="audio" id="audio-section" aria-label="A voice message">
+                <p class="section__eyebrow">a voice message, just press play</p>
+                <button class="audio__btn" type="button" id="audio-btn">
+                    <span class="audio__icon" aria-hidden="true">▶</span>
+                    <span id="audio-btn-label">Hear the message</span>
+                </button>
+                <p class="audio__fallback" id="audio-fallback" hidden>
+                    Voice playback isn't supported on this browser, but the message is —
+                    <em>"Happy birthday, Nana Yaa. The world is brighter because you're in it. Make today loud."</em>
+                </p>
+            </section>
+
+            <!-- ========== WISH WALL ========== -->
+            <section class="wishes" aria-label="Wish wall">
+                <p class="section__eyebrow">wish wall</p>
+                <h2 class="section__title">Leave a wish for Nana Yaa.</h2>
+                <p class="section__sub"><span id="wish-count">0</span> wishes pinned so far.</p>
+
+                <form class="wish-form" id="wish-form">
+                    <input class="wish-form__name" id="wish-name" type="text" maxlength="32" placeholder="Your name" required />
+                    <textarea class="wish-form__msg" id="wish-msg" maxlength="160" rows="2" placeholder="Write something kind…" required></textarea>
+                    <button class="wish-form__btn" type="submit">Pin it</button>
+                </form>
+
+                <div class="wish-wall" id="wish-wall" aria-live="polite"></div>
+            </section>
+
+            <!-- ========== PLAYLIST + SHARE ========== -->
+            <section class="player" aria-label="Birthday playlist">
+                <button class="player__btn" type="button" id="player-btn" aria-pressed="false">
+                    <span class="player__icon" aria-hidden="true">🎵</span>
+                    <span id="player-btn-label">Play the birthday playlist</span>
+                </button>
+                <div class="player__embed" id="player-embed" hidden></div>
+            </section>
+
+            <section class="share" aria-label="Share this page">
+                <button id="share-btn" class="share__btn" type="button">
+                    <span class="share__icon" aria-hidden="true">✨</span>
+                    Send this to Nana Yaa
+                </button>
+                <p id="share-toast" class="share__toast" role="status" aria-live="polite"></p>
+            </section>
+
+            <footer class="foot">
+                <p>Made with cake, candles, and a little code.</p>
+            </footer>
+        </main>
+
+        <!-- Easter egg modal -->
+        <div class="modal" id="easter-modal" hidden>
+            <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="easter-title">
+                <button class="modal__close" type="button" id="easter-close" aria-label="Close">×</button>
+                <p class="modal__eyebrow">a secret card</p>
+                <h2 class="modal__title" id="easter-title">You found it. ✨</h2>
+                <p class="modal__body">
+                    There's a reason this site exists, and it isn't the GIFs. It's because the
+                    world is genuinely lucky to have you in it, and once a year we get a real
+                    excuse to say it. Whatever this year throws at you — answer it loudly,
+                    answer it sparkly, answer it as <em>you</em>.
+                </p>
+                <p class="modal__signoff">— a friend who's quietly cheering ♥</p>
+            </div>
         </div>
-        
-        <div class="gift-section">
-            <h2 class="gift-title">How people react when you enter the room 😍</h2>
-            <div class="gift-img" id="gift-img-hot"></div>
-        </div>
-        
-        <div class="gift-section">
-            <h2 class="gift-title">If I had to describe you with ONE word 👇</h2>
-            <div class="gift-img" id="gift-img-genius"></div>
-        </div>
-        
-        <div class="gift-section">
-            <h2 class="gift-title">The only person as badass as you 💪</h2>
-            <div class="gift-img" id="gift-img-badass"></div>
-        </div>
-        
-         <div class="gift-section">
-            <h2 class="gift-title">This one's for you, my friend 🥂</h2>
-            <div class="gift-img" id="gift-img-cheers"></div>
-        </div>
-        
-        <footer>
-            <p class="call-to-action">Want to create your own Birthday GIFt site? Take <a href="https://scrimba.com/learn/htmlandcss" target="_blank">this HTML & CSS course.</a></p>
-        </footer>
+
+        <script type="module" src="/script.js"></script>
     </body>
 </html>
