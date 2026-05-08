@@ -98,13 +98,15 @@ const IS_BIRTHDAY_TODAY = (() => {
     return now.getMonth() === BIRTH_MONTH - 1 && now.getDate() === BIRTH_DAY;
 })();
 
+// The intro greeting plays on every visit — first impression every time.
+setupIntro();
+
 if (IS_BIRTHDAY_TODAY) {
     document.body.classList.add("is-bday");
-    setupBirthdayIntro();
     startContinuousConfetti();
 }
 
-function setupBirthdayIntro() {
+function setupIntro() {
     const intro = document.getElementById("intro");
     if (!intro) return;
     intro.hidden = false;
@@ -120,8 +122,8 @@ function setupBirthdayIntro() {
                 particles.push(makeParticle(Math.random() * window.innerWidth, -20, false));
             }
             if (!running) loop();
-            // Auto-show the secret card a moment later — the magic continues
-            setTimeout(showSecretCard, 2800);
+            // On her actual birthday, follow up with the secret card
+            if (IS_BIRTHDAY_TODAY) setTimeout(showSecretCard, 2800);
         }, 700);
     };
 
@@ -129,8 +131,8 @@ function setupBirthdayIntro() {
     document.addEventListener("keydown", (e) => {
         if (!intro.hidden && (e.key === "Escape" || e.key === "Enter" || e.key === " ")) close();
     });
-    // Auto-dismiss after 8s if she just sits and watches
-    setTimeout(close, 8000);
+    // Auto-dismiss after 7s if she just watches
+    setTimeout(close, 7000);
 }
 
 function showSecretCard() {
