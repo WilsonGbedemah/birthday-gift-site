@@ -116,16 +116,14 @@ function setupIntro() {
     const close = () => {
         if (closed) return;
         closed = true;
+        // Show the secret card immediately; intro fades out behind it.
+        showSecretCard();
         intro.classList.add("is-leaving");
-        setTimeout(() => {
-            intro.hidden = true;
-            for (let i = 0; i < 200; i++) {
-                particles.push(makeParticle(Math.random() * window.innerWidth, -20, false));
-            }
-            if (!running) loop();
-            // Follow up with the secret card on every visit
-            setTimeout(showSecretCard, 2800);
-        }, 700);
+        for (let i = 0; i < 200; i++) {
+            particles.push(makeParticle(Math.random() * window.innerWidth, -20, false));
+        }
+        if (!running) loop();
+        setTimeout(() => { intro.hidden = true; }, 700);
     };
 
     // Only dismisses on tap or keyboard — no auto-close.
