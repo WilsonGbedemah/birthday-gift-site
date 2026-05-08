@@ -409,15 +409,17 @@ body {
     padding: 0;
 }
 
-.gift__box::before {
-    content: "";
+.gift__gif {
     position: absolute;
     inset: 0;
-    background-image: var(--gif-url);
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     opacity: 0;
     transition: opacity 0.5s ease;
+    pointer-events: none;
+    border-radius: inherit;
 }
 
 .gift__ribbon {
@@ -441,12 +443,12 @@ body {
 
 @media (hover: hover) {
     .gift__box:not([disabled]):hover { transform: scale(1.02) rotate(-1deg); }
-    .gift__box:not([disabled]):hover::before { opacity: 1; }
+    .gift__box:not([disabled]):hover .gift__gif { opacity: 1; }
     .gift__box:not([disabled]):hover .gift__ribbon { opacity: 0; }
     .gift__box:not([disabled]):hover .gift__bow { transform: translate(-50%, -50%) scale(3) rotate(20deg); opacity: 0; }
 }
 
-.gift__box.is-revealed::before { opacity: 1; }
+.gift__box.is-revealed .gift__gif { opacity: 1; }
 .gift__box.is-revealed .gift__ribbon { opacity: 0; }
 .gift__box.is-revealed .gift__bow { transform: translate(-50%, -120%) scale(3) rotate(35deg); opacity: 0; }
 
@@ -1309,6 +1311,29 @@ body.is-bday .hero__crown::after  { top: 12px; right: -22px; animation-delay: 1s
 @keyframes twinkle {
     0%, 100% { opacity: 0.5; }
     50%      { opacity: 1; }
+}
+
+.intro__glitter {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.glitter {
+    position: absolute;
+    line-height: 1;
+    opacity: 0;
+    animation: glitterFloat ease-in-out infinite;
+    will-change: transform, opacity;
+    user-select: none;
+}
+
+@keyframes glitterFloat {
+    0%   { opacity: 0; transform: translateY(8px) scale(0.4) rotate(0deg); }
+    50%  { opacity: 1; transform: translateY(-6px) scale(1.2) rotate(180deg); }
+    100% { opacity: 0; transform: translateY(-20px) scale(0.4) rotate(360deg); }
 }
 
 .intro__content {

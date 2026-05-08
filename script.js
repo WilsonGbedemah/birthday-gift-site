@@ -110,6 +110,7 @@ function setupIntro() {
     const intro = document.getElementById("intro");
     if (!intro) return;
     intro.hidden = false;
+    addIntroGlitter(intro);
 
     let closed = false;
     const close = () => {
@@ -127,12 +128,34 @@ function setupIntro() {
         }, 700);
     };
 
+    // Only dismisses on tap or keyboard — no auto-close.
     intro.addEventListener("click", close);
     document.addEventListener("keydown", (e) => {
         if (!intro.hidden && (e.key === "Escape" || e.key === "Enter" || e.key === " ")) close();
     });
-    // Auto-dismiss after 7s if she just watches
-    setTimeout(close, 7000);
+}
+
+function addIntroGlitter(intro) {
+    const layer = document.createElement("div");
+    layer.className = "intro__glitter";
+    layer.setAttribute("aria-hidden", "true");
+    const SHAPES = ["✨", "⭐", "✦", "✧", "·"];
+    const COLORS = ["#fff", "#ffe0a8", "#ffc6d3", "#fff0c9", "#ffd6ba"];
+    for (let i = 0; i < 60; i++) {
+        const g = document.createElement("span");
+        g.className = "glitter";
+        g.textContent = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+        g.style.left = Math.random() * 100 + "%";
+        g.style.top = Math.random() * 100 + "%";
+        g.style.fontSize = (0.6 + Math.random() * 1.4) + "rem";
+        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        g.style.color = c;
+        g.style.filter = `drop-shadow(0 0 6px ${c}aa)`;
+        g.style.animationDelay = (Math.random() * 4) + "s";
+        g.style.animationDuration = (2.5 + Math.random() * 4) + "s";
+        layer.appendChild(g);
+    }
+    intro.appendChild(layer);
 }
 
 function showSecretCard() {
@@ -213,9 +236,6 @@ function startContinuousConfetti() {
 // =============================
 document.querySelectorAll(".gift:not(.gift--surprise)").forEach((gift) => {
     const box = gift.querySelector(".gift__box");
-    const gif = gift.dataset.gif;
-    if (gif) box.style.setProperty("--gif-url", `url("${gif}")`);
-
     box.addEventListener("click", () => {
         const wasRevealed = box.classList.contains("is-revealed");
         const revealed = box.classList.toggle("is-revealed");
