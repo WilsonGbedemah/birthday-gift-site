@@ -122,8 +122,8 @@ function setupIntro() {
                 particles.push(makeParticle(Math.random() * window.innerWidth, -20, false));
             }
             if (!running) loop();
-            // On her actual birthday, follow up with the secret card
-            if (IS_BIRTHDAY_TODAY) setTimeout(showSecretCard, 2800);
+            // Follow up with the secret card on every visit
+            setTimeout(showSecretCard, 2800);
         }, 700);
     };
 
